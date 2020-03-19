@@ -1,0 +1,24 @@
+const express = require('express');
+
+const redis = require('redis');
+
+const app = express();
+
+const client = redis.createClient({
+    host: 'redis-server',
+    port: 6379
+});
+
+client.set('counter', 0);
+
+
+app.get('/', (req, resp) => {
+    client.get('counter', (err, counter) => {
+        resp.send('counter: ' + counter);
+        client.set('counter', parseInt(counter) + 1);
+    });
+});
+
+app.listen(8080, () => {
+    console.log('Server listening on port 8080');
+});
