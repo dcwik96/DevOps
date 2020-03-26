@@ -24,8 +24,6 @@ app.get('/:number1/:number2', (req, resp) => {
     const number2 = req.params.number2;
     const keyRedis = number1+':'+number2;
 
-    var wynik = nwd(number1,number2)
-
     client.get(keyRedis, (err, valueRedis) => {
         if(valueRedis == null || valueRedis == undefined)
             valueRedis = nwd(number1, number2);
