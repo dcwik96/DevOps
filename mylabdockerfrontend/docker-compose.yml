@@ -12,3 +12,13 @@ services:
             - .:/opt/app
 
         tty: true
+
+    tests:
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+        volumes: 
+            - /opt/app/node_modules
+            - .:/opt/app
+        command: ["yarn", "test"]
+
