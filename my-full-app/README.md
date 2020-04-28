@@ -4,7 +4,7 @@ docker-compose up --build
 ```
 
 # Aplikacja składająca się z:
-## 1. Backend (Node.js)
+## 1. Backend (ExpressJS)
 * Dockerfile
 * keys.js
     * zmienne potrzebne do połaczenia z bazami

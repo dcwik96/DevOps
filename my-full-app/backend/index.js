@@ -21,13 +21,53 @@ const pgClient = new Pool({
     port: keys.pgPort
 });
 pgClient.on('error', () => console.log('No connection to  PG DB'));
-pgClient.query('CREATE TABLE IF NOT EXISTS silnia(liczba INT, wynik INT)').catch(err => console.log(err));
+pgClient.query('CREATE TABLE IF NOT EXISTS silnia(liczba INT, wynik BIGINT)').catch(err => console.log(err));
 
 console.log(keys);
 
+
+function silnia(n) {
+    if ((n == 0) || (n == 1))
+        return 1
+    else {
+        var result = (n * silnia(n - 1));
+        return result
+    }
+}
+
 app.get('/', (req, resp) => {
-    resp.send('Hello from my backenad');
+    resp.send('Hello from my backend');
 })
+
+app.post('/', (req, resp) => {
+    console.log('Wywołano enpoint /number. Licze silnie dla ' + req.body.number);
+
+    const number = req.body.number;
+
+    redisClient.get(number, (err, valueRedis) => {
+        if (valueRedis == null || valueRedis == undefined) {
+            valueRedis = silnia(number);
+            redisClient.set(number, parseInt(valueRedis));
+            pgClient
+                .query('INSERT INTO silnia (liczba, wynik) VALUES ($1, $2)', [number, valueRedis])
+                .catch(err => console.log(err));
+        }
+
+        resp.status(200).json({ wynik: valueRedis });
+    })
+})
+
+app.get('/result', (req, resp) => {
+    console.log('Wywolano endpoint /result. Pobieram rezultaty z Postgres');
+
+    pgClient.query('SELECT * FROM silnia', (err, results) => {
+        if (err) {
+            throw err;
+        }
+
+        resp.status(200).json(results.rows);
+    })
+});
 
 app.listen(4000, err => {
     console.log("Server listening on 4000")
