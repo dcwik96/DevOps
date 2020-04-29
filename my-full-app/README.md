@@ -3,6 +3,11 @@
 docker-compose up --build
 ```
 
+[localhost:8080](localhost:8080)
+
+![Preview](my-full-app/.preview/preview.png)
+
+
 # Aplikacja składająca się z:
 ## 1. Backend (ExpressJS)
 * Dockerfile
@@ -12,7 +17,7 @@ docker-compose up --build
     * połączenie z bazą Postgres
     * połączenie z bazą Redis
     * funkcjonalność aplikacji (liczenie silni)
-## 2. Frontend (React.js)
+## 2. Frontend (React.js with Axios)
 * Dockerfile
 * App.js
     * widok z polem do wysłania liczby, której silnie obliczyć oraz miejsce z wynikiem
