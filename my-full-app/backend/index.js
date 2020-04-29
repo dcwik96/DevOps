@@ -53,14 +53,14 @@ app.post('/', (req, resp) => {
                 .catch(err => console.log(err));
         }
 
-        resp.status(200).json({ wynik: valueRedis });
+        resp.status(200).json({ liczba: number, wynik: valueRedis });
     })
 })
 
 app.get('/result', (req, resp) => {
     console.log('Wywolano endpoint /result. Pobieram rezultaty z Postgres');
 
-    pgClient.query('SELECT * FROM silnia', (err, results) => {
+    pgClient.query('SELECT * FROM silnia ORDER BY liczba', (err, results) => {
         if (err) {
             throw err;
         }
