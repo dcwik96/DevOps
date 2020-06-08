@@ -6,7 +6,7 @@ docker-compose up --build
 [localhost:8080](localhost:8080)
 
 ## Przykład
-![Preview](/my-full-app/.preview/preview.png)
+![Preview](/Docker/my-full-app/.preview/preview.png)
 
 
 # Aplikacja składająca się z:
