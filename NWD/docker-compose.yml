@@ -1,9 +1,0 @@
-services:
- backend-app: 
-  build: .
-  ports: 
-   - "9090:8080"
-  restart: always
- redis-server: 
-  image: redis
-version: "3"
