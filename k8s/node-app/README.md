@@ -27,6 +27,10 @@ kubectl apply -f definition.yml
 kubectl describe {service, pod, } name
 ``
 
+``
+kubectl delete all --all
+``
+
 ## 2. Uruchomienie aplikacji
 
 ```
@@ -38,6 +42,10 @@ kubectl apply -f service-definition.yml
 ```
 minikube ip
 ```
+lub
+``
+./run.sh
+``
 
 ### Dzialanie aplikacji
 ``

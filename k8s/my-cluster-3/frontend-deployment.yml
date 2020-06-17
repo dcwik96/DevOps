@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: frontend-deploymnet
+  labels:
+    app: myfrontend
+    type: frontend
+
+spec:
+  template:
+    metadata:
+      name: frontend-pod
+      labels:
+        app: myfrontend
+        type: frontend
+    spec:
+      containers:
+        - name: my-frontend-containers
+          image: greek96/myfrontend
+          tty: true
+          env:
+            - name: INIT_MESSAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: myapp-config
+                  key: WELCOME_MESSAGE
+  replicas: 1
+
+  selector:
+    matchLabels:
+      type: frontend
