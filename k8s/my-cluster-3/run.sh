@@ -1,7 +1,9 @@
 #!/bin/bash
+minikube addons enable ingress
+
 kubectl apply -f redis-service-clusterip.yml
 kubectl apply -f postgres-service-clusterip.yml
-kubectl apply -f service-nodeport.yml
+kubectl apply -f service-clusterip.yml
 
 kubectl apply -f local-storageclass.yml
 kubectl apply -f postgres-pvc.yml

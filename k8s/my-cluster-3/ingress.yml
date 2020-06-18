@@ -20,7 +20,7 @@ spec:
                 # - path: /api(/|$)(.*)
                   backend:
                     serviceName: myapp-service
-                    servicePort: 30009
+                    servicePort: 5000
                 - path: /?(.*)
                   backend:
                     serviceName: myapp-service-frontend
